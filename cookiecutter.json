@@ -13,6 +13,7 @@
     "Apache Software License 2.0",
     "Not open source"
   ],
+  "secret_key": "entersupersecretkey",
   "raven": "y",
   "timezone": "UTC",
   "windows": "n",
