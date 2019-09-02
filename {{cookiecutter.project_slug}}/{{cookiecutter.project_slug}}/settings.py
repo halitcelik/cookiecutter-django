@@ -79,7 +79,7 @@ COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
 ]
 
-SECRET_KEY = '{{secret_key}}'
+SECRET_KEY = '{{cookiecutter.secret_key}}'
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 MIDDLEWARE_CLASSES = (
