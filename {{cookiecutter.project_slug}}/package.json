@@ -1,0 +1,23 @@
+{
+  "name": "{{project_name}}",
+  "title": "{{project_name}}",
+  "description": "",
+  "version": "0.0.1",
+  "author": "@cruncher",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "private",
+  "scripts": {
+    "lint": "eslint static/js/*.js static/fn/js/*.js static/sparky/js/*.js static/breakpoint/js/*.js apps/*/static/js/*.js",
+    "sass": "node-sass --output-style compact --indent-type tab --indent-width 1 -o static/2016-css static/scss/respond.scss && node-sass --output-style compact --indent-type tab --indent-width 1 -o static/2016-css static/scss/grid.scss"
+  },
+  "dependencies": {
+    "babel-minify": "^0.5.0",
+    "rollup": "^0.66.5"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^4.2.1"
+  }
+}

@@ -1,0 +1,24 @@
+Django>=1.8
+Fabric
+Pillow
+django-crispy-forms
+django-front
+django-sekizai
+# https://github.com/ojii/django-sekizai/archive/master.zip
+cssmin
+gunicorn
+django-compressor
+easy-thumbnails
+django-extensions
+python-memcached
+
+{%- if cookiecutter.raven == 'y' %}
+raven
+{%- endif %}
+{%- if cookiecutter.psycopg2 == '1' %}
+psycopg2-binary
+{%- else %}
+psycopg2
+{%- endif %}
+IPython
+pudb
