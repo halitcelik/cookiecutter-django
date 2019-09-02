@@ -1,5 +1,7 @@
 from compressor.templatetags.compress import CompressorNode
-from django.contrib.staticfiles.storage import StaticFilesStorage as DjangoStaticFilesStorage
+from django.contrib.staticfiles.storage import (
+    StaticFilesStorage as DjangoStaticFilesStorage,
+)
 from django.template.base import Template
 from django.conf import settings
 from django.core.cache import cache
@@ -9,7 +11,7 @@ import os
 import subprocess
 
 
-LAST_MOD_CACHE_KEY = 'global-last-mod-js-dt-{{project_name}}'
+LAST_MOD_CACHE_KEY = 'global-last-mod-js-dt-{{cookiecutter.project_slug}}'
 
 
 def compress(context, data, name):
@@ -48,10 +50,7 @@ def rollup_compress(context, data, name):
 
     # calculate a hash of last_modified_js_file + aggregated imports + code
     data_hash = hashlib.md5(
-        (
-            cache.get(LAST_MOD_CACHE_KEY, '') +
-            base_data
-        ).encode()
+        (cache.get(LAST_MOD_CACHE_KEY, '') + base_data).encode()
     ).hexdigest()
 
     # do we have a compressed version of this?
@@ -69,28 +68,38 @@ def rollup_compress(context, data, name):
         # NOTE: We run this in the project static root, treat everything relative to here
         # i.e. /static/asdas -> ./asdas
         tmp_file_name = os.path.join(settings.STATIC_ROOT, 'tmp.{}.js'.format(data_hash))
-        rollup_file_name = os.path.join(settings.STATIC_ROOT, 'rollup.{}.js'.format(data_hash))
-        minified_file_name = os.path.join(settings.STATIC_ROOT, 'min.{}.js'.format(data_hash))
+        rollup_file_name = os.path.join(
+            settings.STATIC_ROOT, 'rollup.{}.js'.format(data_hash)
+        )
+        minified_file_name = os.path.join(
+            settings.STATIC_ROOT, 'min.{}.js'.format(data_hash)
+        )
 
         with open(tmp_file_name, 'w') as tmp_file:
             tmp_file.write(base_data.replace(settings.STATIC_URL, './'))
 
-        subprocess.check_output('{} {} --silent --format iife --file {}'.format(
-            settings.ROLLUP_BIN,
-            tmp_file_name,
-            rollup_file_name
-        ), shell=True, stderr=subprocess.STDOUT)
+        subprocess.check_output(
+            '{} {} --silent --format iife --file {}'.format(
+                settings.ROLLUP_BIN, tmp_file_name, rollup_file_name
+            ),
+            shell=True,
+            stderr=subprocess.STDOUT,
+        )
         # print(res)
 
         if os.path.exists(rollup_file_name):
-            subprocess.check_output('{} {} -o {}'.format(
-                settings.MINIFY_BIN,
-                rollup_file_name,
-                minified_file_name
-            ), shell=True, stderr=subprocess.STDOUT)
+            subprocess.check_output(
+                '{} {} -o {}'.format(
+                    settings.MINIFY_BIN, rollup_file_name, minified_file_name
+                ),
+                shell=True,
+                stderr=subprocess.STDOUT,
+            )
 
             if os.path.exists(minified_file_name):
-                url = minified_file_name.replace(settings.STATIC_ROOT, settings.STATIC_URL).replace('//', '/')
+                url = minified_file_name.replace(
+                    settings.STATIC_ROOT, settings.STATIC_URL
+                ).replace('//', '/')
                 cache.set(cache_key, url, None)
                 # cleanup
                 if os.path.exists(tmp_file_name):
@@ -108,7 +117,9 @@ class StaticFilesStorage(DjangoStaticFilesStorage):
         for name, data in paths.items():
             if name.lower().endswith('.js'):
                 storage, _ = data
-                last_modified_js_dt = max(last_modified_js_dt, storage.modified_time(name))
+                last_modified_js_dt = max(
+                    last_modified_js_dt, storage.modified_time(name)
+                )
 
             yield name, name, False
 

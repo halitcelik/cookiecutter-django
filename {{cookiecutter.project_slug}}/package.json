@@ -1,6 +1,6 @@
 {
-  "name": "{{project_name}}",
-  "title": "{{project_name}}",
+  "name": "{{cookiecutter.project_slug}}",
+  "title": "{{cookiecutter.project_slug}}",
   "description": "",
   "version": "0.0.1",
   "author": "@cruncher",

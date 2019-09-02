@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from django.contrib import admin
 from django.views.static import serve as static_serve
 
-from {{project_name}}.views import home
+from {{cookiecutter.project_slug}}.views import home
 
 admin.autodiscover()
 
