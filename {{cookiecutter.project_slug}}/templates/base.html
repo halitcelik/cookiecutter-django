@@ -15,7 +15,7 @@
   {% if LANGUAGE_CODE != "fr" %}<link rel="alternate" hreflang="fr" href="http://cruncher.ch/fr/" />{% endif %}
 
   <link rel="icon" type="image/png" href=" {%- if cookiecutter.static == "y" %}
-    {{"{% static "images/favicon.png" %}"}}
+    {{"{% static 'images/favicon.png' %}""}}
   {%- endif %}" />
 
   <script title="config">
