@@ -5,7 +5,7 @@ _ = lambda x: x
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
-DEBUG = True
+DEBUG = {%- if debug == "y" %} True {%- else %} False {%- endif %}
 
 ADMINS = ('Marco', 'marco@cruncher.ch')
 

@@ -22,20 +22,7 @@
     "None",
     "Gulp"
   ],
-  "cloud_provider": [
-    "AWS",
-    "GCP",
-    "None"
-  ],
-  "custom_bootstrap_compilation": "n",
-  "use_compressor": "n",
-  "use_celery": "n",
-  "use_mailhog": "n",
-  "use_sentry": "n",
-  "use_whitenoise": "n",
-  "use_heroku": "n",
-  "use_travisci": "n",
-  "keep_local_envs_in_vcs": "y",
+  "static": "y",
 
-  "debug": "n"
+  "debug": "y"
 }

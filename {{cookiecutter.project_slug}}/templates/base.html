@@ -14,7 +14,9 @@
   {% if LANGUAGE_CODE != "en" %}<link rel="alternate" hreflang="en" href="http://cruncher.ch/en/" />{% endif %}
   {% if LANGUAGE_CODE != "fr" %}<link rel="alternate" hreflang="fr" href="http://cruncher.ch/fr/" />{% endif %}
 
-  <link rel="icon" type="image/png" href="{% static "images/favicon.png" %}" />
+  <link rel="icon" type="image/png" href=" {%- if static == "y" %}
+    {{"{% static "images/favicon.png" %}"}}
+  {%- endif %}" />
 
   <script title="config">
   document.documentElement.className = 'js notransition loading';
