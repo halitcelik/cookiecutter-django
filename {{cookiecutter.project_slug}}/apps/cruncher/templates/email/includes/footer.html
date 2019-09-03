@@ -1,5 +1,8 @@
 <!-- footer -->
-{% load i18n %}
+{%- if i18 == "y" %}
+    {{"{% load i18n" %}}}
+{%- endif %}
+
 <table cellpadding="0" cellspacing="0" border="0" align="center" class="w600" width="600" style="background:#15253E" bgcolor="#15253E">
   {% include "./spacer-block.html" with height="30" colspan="3" width="600" %}
   <tr>
